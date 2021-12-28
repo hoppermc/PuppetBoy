@@ -1,0 +1,68 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
+    id 'com.github.johnrengelman.shadow' version '7.1.1'
+    id 'java-library'
+    id 'maven-publish'
+    id 'application'
+}
+
+group = 'dev.helight.hopper'
+version = '1.0-SNAPSHOT'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_17
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {
+        name = 'spigotmc-repo'
+        url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+    }
+    maven {
+        name = "spigotmc-public"
+        url = "https://hub.spigotmc.org/nexus/content/groups/public/"
+    }
+    maven {
+        name = 'aikar'
+        url = 'https://repo.aikar.co/content/groups/aikar/'
+    }
+    maven {
+        name = 'elmakers'
+        url = 'https://maven.elmakers.com/repository/'
+    }
+    maven {
+        name = 'paper'
+        url = 'https://papermc.io/repo/repository/maven-public/'
+    }
+    maven {
+        name = 'aikar'
+        url = 'https://repo.aikar.co/content/groups/aikar/'
+    }
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = '17'
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = '17'
+}
+
+dependencies {
+    compileOnly 'io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot:1.18.1-R0.1-SNAPSHOT'
+    compileOnly 'com.comphenix.protocol:ProtocolLib:4.7.0'
+
+    implementation 'co.aikar:acf-paper:0.5.0-SNAPSHOT'
+    implementation 'net.bytebuddy:byte-buddy:1.12.6'
+}
+
+shadowJar {
+    relocate 'co.aikar.commands', 'dev.helight.hopper.puppetboy.libs.co.aikar.commands'
+    relocate 'net.bytebuddy', 'dev.helight.hopper.puppetboy.libs.net.bytebuddy'
+}
+
+application {
+    mainClassName = 'MainKt'
+}

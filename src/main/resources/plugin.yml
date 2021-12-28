@@ -1,0 +1,8 @@
+name: PuppetBoy
+description: library for working with pathfinders and mobs in general
+main: dev.helight.hopper.puppetboy.PuppetBoyPlugin
+version: 1.0
+api-version: 1.18
+author: Helight
+depend:
+  - ProtocolLib
